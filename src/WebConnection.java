@@ -1,7 +1,10 @@
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WebConnection {
 
@@ -15,10 +18,10 @@ public class WebConnection {
 
     public void connect() {
         // Initialize web client
-        WebClient webClient = new WebClient();
+        WebClient webClient = new WebClient(BrowserVersion.CHROME);
 
         // Return "TTD" on game win
-        webClient.setPromptHandler((page1, s) -> "TTD");
+        webClient.setPromptHandler((page1, s) -> "TTDDD");
 
         // Don't stop on exceptions caused by Martin's ill formed code
         webClient.getOptions().setThrowExceptionOnScriptError(false);
@@ -68,10 +71,17 @@ public class WebConnection {
         }
 
         // Add the bomb list to the column collection
-        columnCollection.addToColumns(values);
+        // columnCollection.addToColumns(values);
+
+        // Send bad info to die quickly
+        columnCollection.addToColumns(Arrays.asList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
         // Update the current length variable
         currentLength = columns.getFirstElementChild().getTextContent().length();
+
+        // Set the score to the evil result of 1337
+        page.executeJavaScript("score = 1337");
+
     }
 
     public int moveFromTo(int start, int end) {
