@@ -21,7 +21,7 @@ public class WebConnection {
         WebClient webClient = new WebClient(BrowserVersion.CHROME);
 
         // Return "TTD" on game win
-        webClient.setPromptHandler((page1, s) -> "TTDDD");
+        webClient.setPromptHandler((page1, s) -> "Destroyer");
 
         // Don't stop on exceptions caused by Martin's ill formed code
         webClient.getOptions().setThrowExceptionOnScriptError(false);
@@ -80,7 +80,7 @@ public class WebConnection {
         currentLength = columns.getFirstElementChild().getTextContent().length();
 
         // Set the score to the evil result of 1337
-        page.executeJavaScript("score = 1337");
+        page.executeJavaScript("score = 31415");
 
     }
 
